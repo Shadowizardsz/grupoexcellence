@@ -44,12 +44,51 @@
   }
 
   .page{
+    position:relative;
+    z-index:1;
     width:100%;
     max-width:440px;
     display:flex;
     flex-direction:column;
     align-items:center;
   }
+
+  .bg-decor{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    overflow:hidden;
+  }
+
+  .ledger-grid{
+    position:absolute;
+    inset:0;
+    background-image:
+      repeating-linear-gradient(to bottom, rgba(215,163,58,0.05) 0, rgba(215,163,58,0.05) 1px, transparent 1px, transparent 44px),
+      repeating-linear-gradient(to right, rgba(215,163,58,0.035) 0, rgba(215,163,58,0.035) 1px, transparent 1px, transparent 88px);
+  }
+
+  .bg-decor svg{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+  }
+
+  .bg-chart polyline{ fill:none; stroke: var(--gold-primary); stroke-width:1.2; opacity:.12; }
+  .bg-chart circle{ fill: var(--gold-primary); opacity:.16; }
+
+  .corner-mark{
+    position:fixed;
+    width:22px;
+    height:22px;
+    border-color: rgba(215,163,58,0.28);
+    pointer-events:none;
+    z-index:1;
+  }
+  .corner-mark.tl{ top:16px; left:16px; border-top:1px solid; border-left:1px solid; }
+  .corner-mark.br{ bottom:16px; right:16px; border-bottom:1px solid; border-right:1px solid; }
 
   .brand{
     display:flex;
@@ -115,13 +154,14 @@
     background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.00)), var(--graphite);
     border:1px solid rgba(215,163,58,0.35);
     border-radius:12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.35);
     text-decoration:none;
     color: var(--warm-white);
     cursor:pointer;
     font-family:'Inter', sans-serif;
     text-align:left;
     animation: fadeIn .6s ease both;
-    transition: border-color .2s ease, transform .15s ease, background .2s ease;
+    transition: border-color .2s ease, transform .15s ease, background .2s ease, box-shadow .2s ease;
   }
 
   .link-btn:nth-child(1){ animation-delay:.05s; }
@@ -133,6 +173,7 @@
   .link-btn:hover, .link-btn:focus-visible{
     border-color: var(--gold-strong);
     transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(0,0,0,0.45);
   }
 
   .link-btn:active{ transform: translateY(0); }
@@ -238,6 +279,18 @@
 </style>
 </head>
 <body>
+
+<div class="bg-decor" aria-hidden="true">
+  <div class="ledger-grid"></div>
+  <svg class="bg-chart" viewBox="0 0 440 900" preserveAspectRatio="none">
+    <polyline points="-20,780 60,730 130,752 200,668 270,690 330,586 380,612 470,470"/>
+    <circle cx="200" cy="668" r="3.5"/>
+    <circle cx="330" cy="586" r="3.5"/>
+    <circle cx="470" cy="470" r="3.5"/>
+  </svg>
+</div>
+<div class="corner-mark tl"></div>
+<div class="corner-mark br"></div>
 
 <div class="page">
 
