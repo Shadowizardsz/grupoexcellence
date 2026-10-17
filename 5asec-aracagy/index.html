@@ -692,9 +692,9 @@ const CONFIG = {
   instagram: 'https://www.instagram.com/5asec.aracagy',
   // Link oficial de avaliação: no Perfil da Empresa no Google, toque em
   // "Pedir avaliações" e cole aqui o link (ex.: https://g.page/r/XXXX/review).
-  // Enquanto estiver vazio, o botão abre a ficha da loja no Google Maps.
+  // Enquanto estiver vazio, o botão abre a ficha da loja no Google Maps (onde há o botão "Avaliar").
   googleReview: '',
-  mapsQuery: '5àsec Araçagy Lavanderia, Estrada Araçagy/Raposa, 1191, São José de Ribamar - MA',
+  maps: 'https://maps.app.goo.gl/UiaUZUZiBaDJqT4w8',
   contactMessage: 'Olá! Vim pelo link da bio da 5àsec Araçagy e gostaria de mais informações. 😊',
 };
 
@@ -707,12 +707,11 @@ const PLANS = [
 /* ---------- Links ---------- */
 const brl = (n) => n.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const wa = (text) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
-const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CONFIG.mapsQuery)}`;
 
 document.getElementById('link-whatsapp').href = wa(CONFIG.contactMessage);
 document.getElementById('link-instagram').href = CONFIG.instagram;
-document.getElementById('link-map').href = mapsUrl;
-document.getElementById('link-review').href = CONFIG.googleReview || mapsUrl;
+document.getElementById('link-map').href = CONFIG.maps;
+document.getElementById('link-review').href = CONFIG.googleReview || CONFIG.maps;
 document.getElementById('year').textContent = new Date().getFullYear();
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
